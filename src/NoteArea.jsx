@@ -79,7 +79,7 @@ export default function NoteArea() {
   }
 
   return (
-    <div>
+    <div className="area">
       <h1 className="note-area">GET THINGS DONE, ONE TASK AT A TIME</h1>
       <CreateArea onAdd={addNote} />
       {notes.map((noteItem, index) => {

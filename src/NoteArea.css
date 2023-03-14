@@ -122,21 +122,12 @@ form.create-note button {
   outline: 1px solid #487c6d;
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 900px) {
+  
   .note {
     width: 29vh;
   }
-  .note-area {
-    width: 100%;
-    font-size: 3.8rem;
-  }
 
-  form.create-note {
-    max-width: 480px;
-    width: 55vh;
-    margin: 30px auto 20px auto;
-    padding: 15px;
-  }
 
 }
 
@@ -145,12 +136,24 @@ form.create-note button {
     font-size: 2.5rem;
   }
   .note {
-    width: 50vh;
+    width: 52vh;
   }
   form.create-note {
-    max-width: 2000px;
-    width: 50vh;
-    margin: 30px auto 20px auto;
-    padding: 10px;
+  max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .note-area {
+    font-size: 2.5rem;
+  }
+  .note {
+    width: 52vh;
+    margin-right: 0;
+    margin-left: 0;
+  }
+  form.create-note {
+  max-width: 370px;
+  margin: 20px 0;
   }
 }

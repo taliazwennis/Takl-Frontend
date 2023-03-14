@@ -69,10 +69,8 @@ ul.nav {
   border: 1px solid #365052;
   border-radius: 1rem;
   padding-left: 0px;
-  @media (max-width: 768px) {
-    width: 90%;
-  }
 }
+
 ul.nav li {
   width: 50%;
   padding: 1rem;
@@ -111,7 +109,7 @@ body {
   padding: 0;
   font-family: "Montserrat", sans-serif;
   background-image: url("../public/landing-page.png");
-  width: 100%;
+  width: auto;
   background-position: center;
   background-repeat: repeat;
   background-size: cover;
@@ -296,7 +294,7 @@ input:-webkit-autofill:active {
     font-size: 1rem;
   }
   .navbar {
-    width: 105%;
+    width: 100%;
   }
 
   ul.nav {
@@ -305,10 +303,11 @@ input:-webkit-autofill:active {
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .Tabs {
     margin: 0;
   }
+  
   ul.nav li {
     padding: 1rem 0.5rem;
   }
@@ -320,5 +319,13 @@ input:-webkit-autofill:active {
   }
   .login-box p {
     font-size: 1.125rem;
+  }
+
+  .login-box {
+    width: 100%;
+  }
+
+  ul.nav {
+    width: 100%;
   }
 }

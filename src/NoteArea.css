@@ -43,7 +43,7 @@ footer p {
   box-shadow: 0 2px 5px #ccc;
   padding: 10px;
   max-width: 400px;
-  width: 22.5%;
+  width: 50vh;
   margin: 16px;
   float: left;
 }
@@ -108,7 +108,7 @@ form.create-note button {
   outline: none;
 }
 
-.edit-notes{
+.edit-notes {
   margin: 2% 0;
   padding: 0.25rem;
   border-style: solid;
@@ -118,7 +118,39 @@ form.create-note button {
   width: 100%;
 }
 
-
 .edit-notes:focus {
   outline: 1px solid #487c6d;
+}
+
+@media screen and (max-width: 880px) {
+  .note {
+    width: 29vh;
+  }
+  .note-area {
+    width: 100%;
+    font-size: 3.8rem;
+  }
+
+  form.create-note {
+    max-width: 480px;
+    width: 55vh;
+    margin: 30px auto 20px auto;
+    padding: 15px;
+  }
+
+}
+
+@media screen and (max-width: 650px) {
+  .note-area {
+    font-size: 2.5rem;
+  }
+  .note {
+    width: 50vh;
+  }
+  form.create-note {
+    max-width: 2000px;
+    width: 50vh;
+    margin: 30px auto 20px auto;
+    padding: 10px;
+  }
 }

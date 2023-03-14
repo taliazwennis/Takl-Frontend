@@ -5,7 +5,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import "./NoteArea.css";
-import { ConstructionOutlined } from "@mui/icons-material";
 
 export default function NoteArea() {
   const [notes, setNotes] = useState([]);

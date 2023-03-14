@@ -40,7 +40,6 @@ export default function Login() {
       .then((result) => {
         setIsLoading(false);
         setAlert("Success");
-        console.log("Login Results: ", result);
         setLogin(true);
         cookies.set("TOKEN", result.data.token, {
           path: "/",

@@ -23,7 +23,6 @@ export default function AuthComponent() {
 
     axios(configuration)
       .then((result) => {
-        console.log("Result: ", result);
         setMessage(result.data.message);
       })
       .catch((error) => {

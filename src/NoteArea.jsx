@@ -5,24 +5,28 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import "./NoteArea.css";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 export default function NoteArea() {
   const [notes, setNotes] = useState([]);
   const user = useParams();
 
-  useEffect(() => {
+  function getUsers() {
     axios
       .get(`https://takl-backend.onrender.com/user/${user.id}`)
       .then(function (response) {
-        console.log("from NoteArea: ", response);
         setNotes(response.data.notes);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }
 
   useEffect(() => {
+    getUsers();
+  }, []);
+
+  function updateDatabase() {
     const configuration = {
       method: "put",
       url: `https://takl-backend.onrender.com/user/${user.id}`,
@@ -30,17 +34,18 @@ export default function NoteArea() {
     };
 
     axios(configuration)
-      .then((result) => {})
+      .then((result) => {
+      })
       .catch((error) => {
         error = new Error();
       });
-  }, [notes]);
+  }
 
   function addNote(newNote) {
-    console.log("Notes: ", newNote);
     setNotes((prevNotes) => {
       return [...prevNotes, newNote];
     });
+    updateDatabase()
   }
 
   function completeNote(id) {
@@ -49,6 +54,7 @@ export default function NoteArea() {
       ? (newNotes[id].complete = true)
       : (newNotes[id].complete = false);
     setNotes(newNotes);
+    updateDatabase()
   }
 
   function editNote(id, newTitle, newContent) {
@@ -68,6 +74,7 @@ export default function NoteArea() {
       item.content = newContent;
     }
     setNotes(newNotes);
+    updateDatabase()
   }
 
   function deleteNote(id) {
@@ -76,6 +83,7 @@ export default function NoteArea() {
         return index !== id;
       });
     });
+    updateDatabase()
   }
 
   return (

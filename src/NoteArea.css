@@ -3,19 +3,6 @@
   margin: 0;
   box-sizing: border-box;
 }
-html {
-  font-family: "Montserrat", sans-serif;
-}
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background: linear-gradient(#141e30, #243b55);
-  background-image: url("../public/landing-page.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 header {
   background-color: #92edd2;
@@ -96,7 +83,7 @@ footer p {
 
 form.create-note {
   position: relative;
-  width: 480px;
+  max-width: 480px;
   margin: 30px auto 20px auto;
   background: #fff;
   padding: 15px;

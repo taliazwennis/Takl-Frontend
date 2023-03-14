@@ -1,7 +1,7 @@
 import React from "react";
 import { BarLoader } from "react-spinners";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "./styles.css";
 import Alert from "react-bootstrap/Alert";

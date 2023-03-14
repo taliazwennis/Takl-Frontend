@@ -8,7 +8,7 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 export default function Login() {
-  const [email, setEmail] = useState("takltester@gmail.com");
+  const [email, setEmail] = useState("tester@takl.com");
   const [password, setPassword] = useState("password");
   const [login, setLogin] = useState(false);
   const [alert, setAlert] = useState("");

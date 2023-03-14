@@ -82,6 +82,18 @@ footer p {
   outline: none;
 }
 
+.note > *[contenteditable="true"] {
+  border-style: solid;
+  border-width: 2px;
+  border-color: #96c9ba;
+  border-radius: 5px;
+}
+
+[contenteditable="true"]:focus {
+  outline: 1px solid #487c6d;
+}
+
+
 form.create-note {
   position: relative;
   width: 480px;

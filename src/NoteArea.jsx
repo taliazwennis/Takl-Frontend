@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 import axios from "axios";
-import { Add } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 
 import "./NoteArea.css";
@@ -31,8 +30,7 @@ export default function NoteArea() {
     };
 
     axios(configuration)
-      .then((result) => {
-      })
+      .then((result) => {})
       .catch((error) => {
         error = new Error();
       });
@@ -45,7 +43,6 @@ export default function NoteArea() {
     });
   }
 
-
   function completeNote(id) {
     const newNotes = [...notes];
     newNotes[id].complete === false
@@ -54,16 +51,21 @@ export default function NoteArea() {
     setNotes(newNotes);
   }
 
-  function editNote(id) {
+  function editNote(id, newTitle, newContent) {
     const newNotes = [...notes];
     const item = newNotes[id];
-    let newItem = prompt(`Update ${item.title}?`, item.content);
-    let todoObj = { title: item.title, content: newItem, complete: false };
+    let todoObj = { title: newTitle, content: newContent, complete: false };
     newNotes.splice(id, 1, todoObj);
-    if (newItem === null || newItem === "") {
+    if (
+      newTitle === null ||
+      newContent === null ||
+      newTitle === "" ||
+      newContent === ""
+    ) {
       return;
     } else {
-      item.content = newItem;
+      item.title = newTitle;
+      item.content = newContent;
     }
     setNotes(newNotes);
   }
@@ -79,8 +81,7 @@ export default function NoteArea() {
   return (
     <div>
       <h1 className="note-area">GET THINGS DONE, ONE TASK AT A TIME</h1>
-      <CreateArea onAdd={addNote} areaIcon = {Add} title="" content="" />
-
+      <CreateArea onAdd={addNote} />
       {notes.map((noteItem, index) => {
         return (
           <Note

@@ -7,7 +7,7 @@ function Account() {
   return (
     <div>
       <div className="title-section">
-        <img className="title-name" src={"title-image.png"} alt="title" />
+        <h1 className="title-name"> TAKL </h1>
       </div>
       <Tabs />
       {/* <Header /> */}

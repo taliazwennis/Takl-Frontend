@@ -4,7 +4,7 @@ import Login from "./Login";
 import "./styles.css"
  
 const Tabs = () => {
-  const [activeTab, setActiveTab] = useState("signup");
+  const [activeTab, setActiveTab] = useState("login");
   const handleSignup = () => {
     setActiveTab("signup");
   };

@@ -3,23 +3,19 @@ import { useState } from "react";
 import axios from "axios";
 import Alert from "react-bootstrap/Alert";
 import "./styles.css";
+import { BarLoader } from "react-spinners";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("takltester@gmail.com");
+  const [password, setPassword] = useState("password");
   const [login, setLogin] = useState(false);
   const [alert, setAlert] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const formatAlert = () => {
-    if (alert === "Success") {
-      return (
-        <Alert key={"success"} variant={"success"}>
-          Your registration has been completed successfully!
-        </Alert>
-      );
-    } else if (alert === "Fail") {
+    if (alert === "Fail") {
       return (
         <Alert key={"danger"} variant={"danger"}>
           Sorry. Your registration was unsucessful
@@ -29,6 +25,7 @@ export default function Login() {
   };
 
   const handleSubmit = (e) => {
+    setIsLoading(true);
     e.preventDefault();
     const configuration = {
       method: "post",
@@ -41,16 +38,18 @@ export default function Login() {
 
     axios(configuration)
       .then((result) => {
+        setIsLoading(false);
         setAlert("Success");
-        console.log("Login: ", result);
+        console.log("Login Results: ", result);
         setLogin(true);
         cookies.set("TOKEN", result.data.token, {
           path: "/",
         });
-        window.location.href = "/auth";
+        window.location.href = `/user/${result.data.userID}`;
       })
       .catch((error) => {
         error = new Error();
+        setIsLoading(false);
         setAlert("Fail");
       });
   };
@@ -58,6 +57,7 @@ export default function Login() {
   return (
     <div class="login-box">
       <h2>Login</h2>
+      <p>Welcome! You can either sign in using the default account below, or log in with your own account:</p>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div class="user-box">
           <input
@@ -79,13 +79,17 @@ export default function Login() {
           />
           <label>Password</label>
         </div>
-        <button
-          class="button-80"
-          type="submit"
-          onClick={(e) => handleSubmit(e)}
-        >
-          Login
-        </button>
+        {isLoading ? (
+          <BarLoader color="#92edd2" />
+        ) : (
+          <button
+            className="button-80"
+            type="submit"
+            onClick={(e) => handleSubmit(e)}
+          >
+            Login
+          </button>
+        )}
       </form>
       <div className="alert">{formatAlert()}</div>
     </div>

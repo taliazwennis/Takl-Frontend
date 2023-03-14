@@ -1,6 +1,7 @@
 import React from "react";
+import { BarLoader } from "react-spinners";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./styles.css";
 import Alert from "react-bootstrap/Alert";
@@ -11,15 +12,16 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [register, setRegister] = useState(false);
   const [alert, setAlert] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const formatAlert = () => {
     if (alert === "Success") {
       return (
         <Alert key={"success"} variant={"success"}>
-          Your registration has been completed successfully!
+          Your registration has been completed successfully! Please login in
         </Alert>
       );
-    }  else if (alert === "Fail") {
+    } else if (alert === "Fail") {
       return (
         <Alert key={"danger"} variant={"danger"}>
           Sorry. Your registration was unsucessful
@@ -30,6 +32,7 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const configuration = {
       method: "post",
       url: "https://takl-backend.onrender.com/register",
@@ -42,18 +45,23 @@ export default function Register() {
     axios(configuration)
       .then((result) => {
         setRegister(true);
-        console.log(result);
-        setAlert("Success")
+        setIsLoading(false);
+        setAlert("Success");
       })
       .catch((error) => {
         error = new Error();
-        setAlert("Fail")
+        setIsLoading(false);
+        setAlert("Fail");
       });
   };
 
   return (
     <div className="login-box">
       <h2>Register</h2>
+      <p>
+        Don't have an account? Simply fill in your details below to create an
+        account and sign up
+      </p>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className="user-box">
           <input
@@ -85,17 +93,20 @@ export default function Register() {
           />
           <label>Password</label>
         </div>
-        <button
-          className="button-80"
-          type="submit"
-          onClick={(e) => handleSubmit(e)}
-        >
-          Submit
-        </button>
+
+        {isLoading ? (
+          <BarLoader color="#92edd2" />
+        ) : (
+          <button
+            className="button-80"
+            type="submit"
+            onClick={(e) => handleSubmit(e)}
+          >
+            Submit
+          </button>
+        )}
       </form>
-      <div className="alert">
-        {formatAlert()}
-      </div>
+      <div className="alert">{formatAlert()}</div>
     </div>
   );
 }

@@ -10,7 +10,6 @@ import Account from "./Account";
 import FreeComponent from "./FreeComponent";
 import AuthComponent from "./AuthComponent";
 import ProtectedRoutes from "./ProtectedRoutes";
-import Test from "./Testcomponent";
 
 export default function App() {
   return (
@@ -19,7 +18,7 @@ export default function App() {
         <Route path="/" element={<Account />}/>
           <Route exact path="/free" element={<FreeComponent />} />
           <Route
-            exact path="/auth"
+            exact path="/user/:id"
             element={
               <ProtectedRoutes>
               <AuthComponent />

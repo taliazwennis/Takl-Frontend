@@ -10,22 +10,23 @@ export default function NoteArea() {
   const [notes, setNotes] = useState([]);
   const user = useParams();
 
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   function getUsers() {
     axios
       .get(`https://takl-backend.onrender.com/user/${user.id}`)
       .then(function (response) {
-        setNotes(response.data.notes);
+        setNotes(response.data.notes || []);
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  function updateDatabase() {
+  function updateDatabase(notes) {
+    console.log("updating notes: ", notes);
     const configuration = {
       method: "put",
       url: `https://takl-backend.onrender.com/user/${user.id}`,
@@ -34,33 +35,32 @@ export default function NoteArea() {
 
     axios(configuration)
       .then((result) => {
+        console.log("Result from MongoDB: ", result.data.notes);
       })
       .catch((error) => {
         error = new Error();
       });
+
+    setNotes(notes);
   }
 
   function addNote(newNote) {
-    setNotes((prevNotes) => {
-      return [...prevNotes, newNote];
-    });
-    updateDatabase()
+    updateDatabase([...notes, newNote]);
   }
 
-  function completeNote(id) {
+  function completeNote(index) {
     const newNotes = [...notes];
-    newNotes[id].complete === false
-      ? (newNotes[id].complete = true)
-      : (newNotes[id].complete = false);
-    setNotes(newNotes);
-    updateDatabase()
+    newNotes[index].complete === false
+      ? (newNotes[index].complete = true)
+      : (newNotes[index].complete = false);
+    updateDatabase(newNotes);
   }
 
-  function editNote(id, newTitle, newContent) {
+  function editNote(index, newTitle, newContent) {
     const newNotes = [...notes];
-    const item = newNotes[id];
+    const item = newNotes[index];
     let todoObj = { title: newTitle, content: newContent, complete: false };
-    newNotes.splice(id, 1, todoObj);
+    newNotes.splice(index, 1, todoObj);
     if (
       newTitle === null ||
       newContent === null ||
@@ -72,17 +72,13 @@ export default function NoteArea() {
       item.title = newTitle;
       item.content = newContent;
     }
-    setNotes(newNotes);
-    updateDatabase()
+    updateDatabase(newNotes);
   }
 
   function deleteNote(id) {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((noteItem, index) => {
-        return index !== id;
-      });
-    });
-    updateDatabase()
+    updateDatabase(notes.filter((_, index) => {
+      return index !== id;
+    }));
   }
 
   return (

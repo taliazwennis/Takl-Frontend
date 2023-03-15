@@ -1,0 +1,13 @@
+
+> frontend@0.1.0 netlify
+> netlify deploy packages/website/build
+
+[32mDeploy path: [39m/home/talia/Portfolio Project/Takl V3.0/Takl-Frontend/build
+Deploying to draft URL...
+
+[32mLogs: [39m             https://app.netlify.com/sites/friendly-muffin-82800d/deploys/6410ef2b521e80369b98be42
+[32mWebsite Draft URL: [39mhttps://6410ef2b521e80369b98be42--friendly-muffin-82800d.netlify.app
+
+If everything looks good on your draft URL, deploy it to your main site URL with the --prod flag.
+netlify deploy --prod
+
